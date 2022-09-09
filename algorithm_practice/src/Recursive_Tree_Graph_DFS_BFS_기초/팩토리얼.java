@@ -12,7 +12,6 @@
 출력예제
 120
  */
-
 package Recursive_Tree_Graph_DFS_BFS_기초;
 
 public class 팩토리얼 {
