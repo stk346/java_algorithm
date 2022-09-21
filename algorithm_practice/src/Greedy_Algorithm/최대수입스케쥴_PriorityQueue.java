@@ -47,12 +47,14 @@ public class 최대수입스케쥴_PriorityQueue {
         PriorityQueue<Integer> pQ = new PriorityQueue<>(Collections.reverseOrder());
         Collections.sort(arr); // 날짜에 의해서 내림차순 정렬
         int j = 0;
-        for (int i=max; i>=1; i--) {
+        for (int i=max; i>=1; i--) { // 일 수가 많이 남은 강좌들부터 루프를 돈다.
             for ( ; j<n; j++) {
-                if (arr.get(j).date < i) break;
+                if (arr.get(j).date < i) break; // 가장 일 수가 많이 남은 강의를 차레대로 보며 max값 추출
                 pQ.offer(arr.get(j).money);
             }
-            if(!pQ.isEmpty()) answer += pQ.poll();
+            if(!pQ.isEmpty()) {
+                answer += pQ.poll();
+            }
         }
         return answer;
     }
