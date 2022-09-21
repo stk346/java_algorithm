@@ -35,24 +35,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-class Time implements Comparable<Time> {
+class Time2 implements Comparable<Time2> {
     public int s, e;
-    Time(int s, int e) {
+    Time2(int s, int e) {
         this.s = s;
         this.e = e;
     }
     @Override
-    public int compareTo(Time o) {
+    public int compareTo(Time2 o) {
         if (this.e == o.e) return this.s - o.s;
         else return this.e - o.e;
     }
 }
 public class 회의실배정 {
-    public int solution(ArrayList<Time> arr, int n) {
+    public int solution(ArrayList<Time2> arr, int n) {
         int cnt = 0;
         Collections.sort(arr);
         int endTime = 0;
-        for (Time ob : arr) {
+        for (Time2 ob : arr) {
             if (ob.s >= endTime) {
                 cnt++;
                 endTime = ob.e;
@@ -65,11 +65,11 @@ public class 회의실배정 {
         회의실배정 T = new 회의실배정();
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        ArrayList<Time> arr = new ArrayList<>();
+        ArrayList<Time2> arr = new ArrayList<>();
         for (int i=0; i<n; i++) {
             int x = sc.nextInt();
             int y = sc.nextInt();
-            arr.add(new Time(x, y));
+            arr.add(new Time2(x, y));
         }
         System.out.println(T.solution(arr, n));
     }
