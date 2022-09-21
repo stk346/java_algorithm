@@ -65,9 +65,11 @@ public class 결혼식 {
         for (int i=0; i<n; i++) {
             int sT = sc.nextInt();
             int eT = sc.nextInt();
+
             arr.add(new Time(sT, 's'));
             arr.add(new Time(eT, 'e'));
         }
+
         System.out.println(T.solution(arr));
     }
 }
