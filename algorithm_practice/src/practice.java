@@ -1,45 +1,47 @@
-/*
+import java.util.*;
 
- */
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
-
-class Time3 implements Comparable<Time3>{
-    int t;
-    char s;
-    public Time3 (int t, char s) {
-        this.t = t;
-        this.s = s;
+class Lecture implements Comparable<Lecture>{
+    int money;
+    int date;
+    public Lecture (int money, int date) {
+        this.money = money;
+        this.date = date;
     }
     @Override
-    public int compareTo(Time3 ob) {
-        if (this.t == ob.t) return this.s - ob.s;
-        else return this.t - ob.t;
+    public int compareTo(Lecture ob) {
+        return ob.date - this.date;
     }
+
 }
 public class practice {
-    public int solution(ArrayList<Time3> arr) {
-        int answer = Integer.MIN_VALUE;
-        int cnt = 0;
+    static int max, answer = 0;
+    public int solution(ArrayList<Lecture> arr) {
         Collections.sort(arr);
-        for (Time3 t : arr) {
-            if (t.s == 's') cnt++;
-            else cnt--;
-            answer = Math.max(answer, cnt);
+        PriorityQueue<Integer> pQ = new PriorityQueue(Collections.reverseOrder());
+        int j = 0;
+        for (int i=max; i>=1; i--) {
+            for ( ; j<arr.size(); j++) {
+                if (arr.get(j).date < i) {
+                    break;
+                }
+                pQ.offer(arr.get(j).money);
+            }
+            if (!pQ.isEmpty()) {
+                answer += pQ.poll();
+            }
         }
         return answer;
     }
-
     public static void main(String[] args) {
         practice T = new practice();
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        ArrayList<Time3> arr = new ArrayList<>();
+        ArrayList<Lecture> arr = new ArrayList<>();
         for (int i=0; i<n; i++) {
-            arr.add(new Time3(sc.nextInt(), 's'));
-            arr.add(new Time3(sc.nextInt(), 'e'));
+            int money = sc.nextInt();
+            int date = sc.nextInt();
+            arr.add(new Lecture(money, date));
+            if (date > max) max = date;
         }
         System.out.println(T.solution(arr));
     }
