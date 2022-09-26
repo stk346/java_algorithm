@@ -74,7 +74,7 @@ public class 다익스트라알고리즘 {
         n = sc.nextInt();
         m = sc.nextInt();
         graph = new ArrayList<ArrayList<Edge>>();
-        for (int i=0; i<n; i++) {
+        for (int i=0; i<=n; i++) {
             graph.add(new ArrayList<Edge>());
         }
         dis = new int[n+1];
@@ -88,6 +88,7 @@ public class 다익스트라알고리즘 {
         T.solution(1);
         for (int i=2; i<=n; i++) {
             if (dis[i] != Integer.MAX_VALUE) System.out.println(i + " : " + dis[i]);
+            else System.out.println(i + " : impossible");
         }
     }
 }
