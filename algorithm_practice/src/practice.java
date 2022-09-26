@@ -1,48 +1,34 @@
-import java.util.*;
+import java.util.Scanner;
 
-class Lecture implements Comparable<Lecture>{
-    int money;
-    int date;
-    public Lecture (int money, int date) {
-        this.money = money;
-        this.date = date;
-    }
-    @Override
-    public int compareTo(Lecture ob) {
-        return ob.date - this.date;
-    }
-
-}
 public class practice {
-    static int max, answer = 0;
-    public int solution(ArrayList<Lecture> arr) {
-        Collections.sort(arr);
-        PriorityQueue<Integer> pQ = new PriorityQueue(Collections.reverseOrder());
-        int j = 0;
-        for (int i=max; i>=1; i--) {
-            for ( ; j<arr.size(); j++) {
-                if (arr.get(j).date < i) {
-                    break;
-                }
-                pQ.offer(arr.get(j).money);
-            }
-            if (!pQ.isEmpty()) {
-                answer += pQ.poll();
-            }
+    static int[] ua;
+    static int Find(int v) {
+        if (v == ua[v]) return v;
+        else return ua[v] = Find(ua[v]);
+    }
+    static void Union(int a, int b) {
+        int fa = Find(a);
+        int fb = Find(b);
+        if (fa != fb) {
+            ua[fa] = fb;
         }
-        return answer;
     }
     public static void main(String[] args) {
-        practice T = new practice();
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        ArrayList<Lecture> arr = new ArrayList<>();
-        for (int i=0; i<n; i++) {
-            int money = sc.nextInt();
-            int date = sc.nextInt();
-            arr.add(new Lecture(money, date));
-            if (date > max) max = date;
+        int m = sc.nextInt();
+        ua = new int[n+1];
+        for (int i=1; i<=n; i++) ua[i] = i;
+        for (int i=1; i<=m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            Union(a, b);
         }
-        System.out.println(T.solution(arr));
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        int f1 = Find(a);
+        int f2 = Find(b);
+        if (f1 == f2) System.out.println("YES");
+        else System.out.println("NO");
     }
 }
