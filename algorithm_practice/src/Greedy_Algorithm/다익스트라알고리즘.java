@@ -34,7 +34,7 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
-class Edge implements Comparable<Edge> {
+class Edge implements Comparable<Edge3> {
     public int vex;
     public int cost;
     Edge (int vex, int cost) {
@@ -42,27 +42,27 @@ class Edge implements Comparable<Edge> {
         this.cost = cost; // 비용(가중치 값)
     }
     @Override
-    public int compareTo(Edge ob) {
+    public int compareTo(Edge3 ob) {
         return this.cost - ob.cost;
     }
 }
 public class 다익스트라알고리즘 {
     static int n, m;
-    static ArrayList<ArrayList<Edge>> graph;
+    static ArrayList<ArrayList<Edge3>> graph;
     static int[] dis;
     public void solution(int v) {
-        PriorityQueue<Edge> pQ = new PriorityQueue<>();
-        pQ.offer(new Edge(v, 0));
+        PriorityQueue<Edge3> pQ = new PriorityQueue<>();
+        pQ.offer(new Edge3(v, 0));
         dis[v] = 0;
         while (!pQ.isEmpty()) {
-            Edge tmp = pQ.poll();
+            Edge3 tmp = pQ.poll();
             int now = tmp.vex;
             int nowCost = tmp.cost;
             if (nowCost > dis[now]) continue; // 이미 작은 값으로 비교해 봤으면 그 뒤는 볼 필요가 없음
-            for (Edge ob : graph.get(now)) {
+            for (Edge3 ob : graph.get(now)) {
                 if (dis[ob.vex] > nowCost + ob.cost) {
                     dis[ob.vex] = nowCost + ob.cost;
-                    pQ.offer(new Edge(ob.vex, nowCost + ob.cost));
+                    pQ.offer(new Edge3(ob.vex, nowCost + ob.cost));
                 }
             }
         }
@@ -73,9 +73,9 @@ public class 다익스트라알고리즘 {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
         m = sc.nextInt();
-        graph = new ArrayList<ArrayList<Edge>>();
+        graph = new ArrayList<ArrayList<Edge3>>();
         for (int i=0; i<=n; i++) {
-            graph.add(new ArrayList<Edge>());
+            graph.add(new ArrayList<Edge3>());
         }
         dis = new int[n+1];
         Arrays.fill(dis, Integer.MAX_VALUE); // Array의 값을 MAX_VALUE로 초기화
@@ -83,7 +83,7 @@ public class 다익스트라알고리즘 {
             int a = sc.nextInt();
             int b = sc.nextInt();
             int c = sc.nextInt();
-            graph.get(a).add(new Edge(b, c));
+            graph.get(a).add(new Edge3(b, c));
         }
         T.solution(1);
         for (int i=2; i<=n; i++) {
